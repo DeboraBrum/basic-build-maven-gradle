@@ -12,6 +12,7 @@ public class App {
         Scanner input = new Scanner(System.in);
         int operation = 0, qtd = 0;
         String name, price;
+        Double total = 0.0;
         List<Produto> listaProdutos = new ArrayList<Produto>();
         System.out.println("Hello Roberto!");
         System.out.println("O que gostaria de fazer ?");
@@ -24,8 +25,10 @@ public class App {
                 break;
             if (operation == 1) {
                 for (Produto p : listaProdutos) {
+                    total += p.getValor();
                     System.out.println(p);
                 }
+                System.out.printf("Valor total dos produtos: %.2f\n", total);
             } else {
                 System.out.println("Quantos produtos deseja cadastrar?");
                 qtd = Integer.parseInt(input.nextLine());
