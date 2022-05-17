@@ -9,8 +9,13 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
+    id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
 }
+group = 'br.com.debora'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -19,7 +24,11 @@ repositories {
 
 dependencies {
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:30.1.1-jre'
+    // implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.liquibase:liquibase-core'
+	runtimeOnly 'org.postgresql:postgresql'
 }
 
 testing {
@@ -32,7 +41,10 @@ testing {
     }
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'br.com.debora.App'
+// application {
+//     // Define the main class for the application.
+//     mainClass = 'br.com.debora.App'
+// }
+tasks.jar {
+    manifest.attributes["Main-Class"] = "br.com.debora.App"
 }
