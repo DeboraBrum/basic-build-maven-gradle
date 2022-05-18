@@ -83,8 +83,13 @@
             <version>3.1.0</version>
             <configuration>
               <archive>
+                <manifest>
+                  <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                  <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                  <mainClass>com.debora.App</mainClass>
+                </manifest>
                 <manifestEntries>
-                  <Premain-Class>com.debora.App</Premain-Class>
+                  <Premain-Class>com.newrelic.bootstrap.BootstrapAgent</Premain-Class>
                   <Can-Redefine-Classes>true</Can-Redefine-Classes>
                   <Can-Retransform-Classes>true</Can-Retransform-Classes>
                 </manifestEntries>
