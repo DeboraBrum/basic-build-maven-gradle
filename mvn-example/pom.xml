@@ -84,7 +84,7 @@
             <configuration>
               <archive>
                 <manifestEntries>
-                  <Premain-Class>com.newrelic.bootstrap.BootstrapAgent</Premain-Class>
+                  <Premain-Class>com.debora.App</Premain-Class>
                   <Can-Redefine-Classes>true</Can-Redefine-Classes>
                   <Can-Retransform-Classes>true</Can-Retransform-Classes>
                 </manifestEntries>
