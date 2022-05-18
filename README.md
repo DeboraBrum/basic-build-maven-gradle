@@ -214,3 +214,58 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 #### Fonte
 - [Repositório Maven](https://github.com/torneseumprogramador/java-maven-build)
 - [Repositório Gradle](https://github.com/torneseumprogramador/java-gradle-build)
+
+
+# New Relic
+- Para fazer a instalação do new relic na máquina linux, devemos executar esses comandos:
+```shell
+curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-S5KL1GNWU9Z4TLKGMNF4DWM87Q9 NEW_RELIC_ACCOUNT_ID=3495412 /usr/local/bin/newrelic install
+```
+- Na aplicação, precisamos adicionar a dependência e plugin no pow.xml:
+```
+<dependency>
+  <groupId>com.newrelic.agent.java</groupId>
+  <artifactId>newrelic-java</artifactId>
+  <version>7.7.0</version>
+  <scope>provided</scope>
+  <type>zip</type>
+</dependency>
+
+
+<!-- Unzip New Relic Java agent into target/ -->
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>unpack-newrelic</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeGroupIds>com.newrelic.agent.java</includeGroupIds>
+              <includeArtifactIds>newrelic-java</includeArtifactIds>
+              <!-- you can optionally exclude files -->
+              <!-- <excludes>**/newrelic.yml</excludes> -->
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+```
+- Após isso, executamos o projeto e deverá aparecer um newrelic.jar.
+  - nesse diretório, devemos colocar um arquivo newrelic.yml
+  - template [aqui](https://docs.newrelic.com/docs/apm/agents/java-agent/configuration/java-agent-config-file-template/)
+  - precisa alterar alguns dados do arquivo:
+    - license_key
+    - app_name
+- Para rodar o new relic, utilizamos o comando: 
+```shell
+java -javagent:<path to your new relic jar>\newrelic.jar -jar <path to your application jar>\<you rapplication jar name>.jar
+```
+[Referencia](https://stackoverflow.com/questions/26901959/new-relic-for-spring-boot)
