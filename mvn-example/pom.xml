@@ -83,10 +83,11 @@
             <version>3.1.0</version>
             <configuration>
               <archive>
-                <manifest>
-                  <addClasspath>true</addClasspath>
-                  <mainClass>com.debora.App</mainClass>
-                </manifest>
+                <manifestEntries>
+                  <Premain-Class>com.newrelic.bootstrap.BootstrapAgent</Premain-Class>
+                  <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                  <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                </manifestEntries>
               </archive>
             </configuration>
           </plugin>
@@ -116,6 +117,13 @@
               </execution>
             </executions>
           </plugin>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+              <mainClass>com.debora.App</mainClass>
+            </configuration>
+			    </plugin>
       </plugins>
     </pluginManagement>
   </build>
